@@ -245,8 +245,8 @@ output [4:0] MEM_WB_Rd;
 
 	DataMemory mem_data_memory(
 		.clk(clk), 
-		.MemRead(ID_EX_MemRead), 
-		.MemWrite(ID_EX_MemWrite), 
+		.MemRead(EX_MEM_MemRead), 
+		.MemWrite(EX_MEM_MemWrite), 
 		.address(EX_MEM_ALUResult), 
 		.WriteData(EX_MEM_WriteData), 
 		.ReadData(MEM_ReadData)

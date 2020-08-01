@@ -42,7 +42,7 @@ output [4:0] DestinationRegOut;
 	Reg_32bit ALUResultReg(
 		.clk(clk),
 		.rst(rst),
-		.d(ALUResultOut),
+		.d(ALUResultIn),
 		.en(1'b1),
 		.q(ALUResultOut)
 		);

@@ -6,13 +6,15 @@ input [4:0] ReadReg1;
 input [4:0] ReadReg2;
 input [4:0] WriteReg;
 input [31:0] WriteData;
-output [31:0] ReadData1;
-output [31:0] ReadData2;
+output reg [31:0] ReadData1;
+output reg [31:0] ReadData2;
 
 	reg [31:0] Register [0:31];
-	
-	assign ReadData1 = ~clk? Register[ReadReg1]: 32'bz;
-	assign ReadData2 = ~clk? Register[ReadReg2]: 32'bz;
+
+	always @(negedge clk) begin
+		ReadData1 = Register[ReadReg1];
+		ReadData2 = Register[ReadReg2];
+	end
 
 	integer i;
 	always @(posedge rst) begin
@@ -22,8 +24,8 @@ output [31:0] ReadData2;
 		end
 	end
 
-	always @(clk or WriteReg or WriteData or RegWrite) begin
-		if (clk & RegWrite)
+	always @(posedge clk) begin
+		if (RegWrite)
 			if (WriteReg != 5'b0)
 				Register[WriteReg] <= WriteData;
 	end
