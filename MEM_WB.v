@@ -10,7 +10,7 @@ output MemToRegOut;
 output RegWriteOut;
 input [31:0] ReadDataIn;
 input [31:0] ALUResultIn;
-input [31:0] DestinationRegIn;
+input [4:0] DestinationRegIn;
 output [31:0] ReadDataOut;
 output [31:0] ALUResultOut;
 output [4:0] DestinationRegOut;
