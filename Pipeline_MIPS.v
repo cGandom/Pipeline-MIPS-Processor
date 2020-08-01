@@ -2,6 +2,7 @@ module Pipeline_MIPS(clk, rst);
 input clk;
 input rst;
 
+	wire [31:0]inst;
 	wire [5:0]Opc;
 	wire [5:0]func;
 	wire equalR;
@@ -19,7 +20,6 @@ input rst;
 	wire PCWrite;
 	wire IF_ID_Write;
 	wire IF_Flush;
-	wire CSSel;
 	wire [1:0]ForwardA;
 	wire[1:0]ForwardB;
 	wire ALUSrc;
@@ -31,6 +31,7 @@ input rst;
 	wire RegWrite;
 
 	Datapath DP(
+		.inst(inst),
 		.clk(clk),
 		.rst(rst),
 		.Opc(Opc),
@@ -50,7 +51,6 @@ input rst;
 		.PCWrite(PCWrite),
 		.IF_ID_Write(IF_ID_Write),
 		.IF_Flush(IF_Flush),
-		.CSSel(CSSel),
 		.ForwardA(ForwardA),
 		.ForwardB(ForwardB),
 		.ALUSrc(ALUSrc),
@@ -63,6 +63,7 @@ input rst;
 	);
 	
 	Controller C(
+		.inst(inst),
 		.Opc(Opc),
 		.func(func),
 		.equalR(equalR),
@@ -80,16 +81,15 @@ input rst;
 		.PCWrite(PCWrite),
 		.IF_ID_Write(IF_ID_Write),
 		.IF_Flush(IF_Flush),
-		.CSSel(CSSel),
 		.ForwardA(ForwardA),
 		.ForwardB(ForwardB),
-		.ALUSrc(ALUSrc),
-		.ALUOperation(ALUOperation),
-		.RegDst(RegDst),
-		.MemWrite(MemWrite),
-		.MemRead(MemRead),
-		.MemToReg(MemToReg),
-		.RegWrite(RegWrite)
+		.FinalALUSrc(ALUSrc),
+		.FinalALUOperation(ALUOperation),
+		.FinalRegDst(RegDst),
+		.FinalMemWrite(MemWrite),
+		.FinalMemRead(MemRead),
+		.FinalMemToReg(MemToReg),
+		.FinalRegWrite(RegWrite)
 	);
 
 endmodule
