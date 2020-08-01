@@ -1,7 +1,7 @@
 module EX_MEM(clk, rst, MemWriteIn, MemReadIn, MemToRegIn, RegWriteIn,
 		MemWriteOut, MemReadOut, MemToRegOut, RegWriteOut,
-		ZeroIn, ALUResultIn, WriteDataIn, DestinationRegIn, 
-		ZeroOut, ALUResultOut, WriteDataOut, DestinationRegOut);
+		ALUResultIn, WriteDataIn, DestinationRegIn, 
+		ALUResultOut, WriteDataOut, DestinationRegOut);
 input clk;
 input rst;
 input MemWriteIn;
@@ -12,11 +12,9 @@ output MemWriteOut;
 output MemReadOut;
 output MemToRegOut;
 output RegWriteOut;
-input ZeroIn;
 input [31:0] ALUResultIn;
 input [31:0] WriteDataIn;
 input [4:0] DestinationRegIn;
-output ZeroOut;
 output [31:0] ALUResultOut;
 output [31:0] WriteDataOut;
 output [4:0] DestinationRegOut;
@@ -51,14 +49,6 @@ output [4:0] DestinationRegOut;
 		.d(RegWriteIn),
 		.en(1'b1),
 		.q(RegWriteOut)
-		);
-
-	Reg_1bit ZeroReg(
-		.clk(clk),
-		.rst(rst),
-		.d(ZeroIn),
-		.en(1'b1),
-		.q(ZeroOut)
 		);
 
 	Reg_32bit ALUResultReg(
