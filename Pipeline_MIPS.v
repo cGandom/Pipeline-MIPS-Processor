@@ -1,4 +1,6 @@
-module Pipeline_MIPS();
+module Pipeline_MIPS(clk, rst);
+input clk;
+input rst;
 
 	wire [5:0]Opc;
 	wire [5:0]func;
@@ -29,6 +31,8 @@ module Pipeline_MIPS();
 	wire RegWrite;
 
 	Datapath DP(
+		.clk(clk),
+		.rst(rst),
 		.Opc(Opc),
 		.func(func),
 		.equalR(equalR),
