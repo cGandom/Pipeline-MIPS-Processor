@@ -8,10 +8,6 @@ input [31:0] InstIn;
 output [31:0] PCPlusOut;
 output [31:0] InstOut;
 
-	assign asyncRst = (rst == 1'b1)? 1'b1:
-			(aclr == 1'b1)? 1'b1:
-			1'b0;
-
 	Reg_32bit_WithClear PCPlusReg(
 		.clk(clk),
 		.rst(rst),
