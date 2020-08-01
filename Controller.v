@@ -1,7 +1,8 @@
-module Controller(Opc, func, equalR, ID_EX_Rs, ID_EX_Rt, EX_MEM_RegWrite, EX_MEM_Rd,
+module Controller(inst, Opc, func, equalR, ID_EX_Rs, ID_EX_Rt, EX_MEM_RegWrite, EX_MEM_Rd,
 	MEM_WB_RegWrite, MEM_WB_Rd, ID_Rs, ID_Rt, ID_EX_MemRead, InstSrc, PCSrc,
-	PCWrite, IF_ID_Write, IF_Flush, ForwardA, ForwardB, FinalALUSrc,
-	FinalALUOperation, FinalRegDst, FinalMemWrite, FinalMemRead, FinalMemToReg, FinalRegWrite);
+	PCWrite, IF_ID_Write, IF_Flush, ForwardA, ForwardB, FinalALUSrc, FinalALUOperation,
+	FinalRegDst, FinalMemWrite, FinalMemRead, FinalMemToReg, FinalRegWrite);
+input [31:0]inst;
 input [5:0]Opc;
 input [5:0]func;
 input equalR;
@@ -30,8 +31,9 @@ output FinalMemToReg;
 output FinalRegWrite;
 
 	wire RT,addi,andi,lw,sw,beq,bne,j,nop;
-	OpcDCD OD(
+	OpcDcd OD(
 		.Opc(Opc),
+		.inst(inst),
 		.RT(RT),
 		.addi(addi),
 		.andi(andi),
@@ -108,8 +110,8 @@ output FinalRegWrite;
 	);
 
 	
-	Mux2to1_7bit CSSelMux(
-		.inp0(7'b0),
+	Mux2to1_9bit CSSelMux(
+		.inp0(9'b0),
 		.inp1({ALUSrc, ALUOperation, RegDst, MemWrite, MemRead, MemToReg, RegWrite}),
 		.sel(CSSel),
 		.out({FinalALUSrc, FinalALUOperation, FinalRegDst, FinalMemWrite, FinalMemRead, FinalMemToReg, FinalRegWrite})
