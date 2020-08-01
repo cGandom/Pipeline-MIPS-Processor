@@ -21,16 +21,16 @@ input IF_ID_Write;
 output [5:0] func;
 output [5:0] Opc;
 output [31:0] inst;
-output [5:0] ID_Rs;
-output [5:0] ID_Rt;
+output [4:0] ID_Rs;
+output [4:0] ID_Rt;
 output equalR;
-output [5:0] ID_EX_Rt;
-output [5:0] ID_EX_Rs;
+output [4:0] ID_EX_Rt;
+output [4:0] ID_EX_Rs;
 output ID_EX_MemRead;
 output EX_MEM_RegWrite;
-output [5:0] EX_MEM_Rd;
+output [4:0] EX_MEM_Rd;
 output MEM_WB_RegWrite;
-output [5:0] MEM_WB_Rd;
+output [4:0] MEM_WB_Rd;
 
 
 	/*=====Wires=====*/
@@ -44,18 +44,18 @@ output [5:0] MEM_WB_Rd;
 	//Stage EX
 	wire ID_EX_ALUSrc, ID_EX_RegDst, ID_EX_MemWrite, ID_EX_MemToReg, ID_EX_RegWrite;
 	wire [2:0] ID_EX_ALUOperation;
-	wire [5:0] ID_EX_Rd, EX_DestinationReg;
+	wire [4:0] ID_EX_Rd, EX_DestinationReg;
 	wire [31:0] ID_EX_ReadReg1, ID_EX_ReadReg2, ID_EX_SignEx, EX_ForwardA_out, EX_ForwardB_out, EX_ALUSrcB_out;
 	wire [31:0] EX_ALUResult;
 
 	//Stage MEM
 	wire EX_MEM_MemWrite, EX_MEM_MemRead, EX_MEM_MemToReg;
-	wire [5:0] EX_MEM_DestinationReg;
+	wire [4:0] EX_MEM_DestinationReg;
 	wire [31:0] EX_MEM_ALUResult, EX_MEM_WriteData, MEM_ReadData;
 
 	//Stage WB
 	wire MEM_WB_MemToReg;
-	wire [5:0] MEM_WB_WriteReg;
+	wire [4:0] MEM_WB_WriteReg;
 	wire [31:0] WB_WriteData, MEM_WB_ReadData, MEM_WB_ALUResult;
 
 	/*=====Modules=====*/
@@ -63,7 +63,7 @@ output [5:0] MEM_WB_Rd;
 
 	InstructionMemory if_inst_mem(
 		.address(IF_IM_Addr_inp),
-		.inst(IF_Inst)
+		.instruction(IF_Inst)
 		);
 	
 	Reg_32bit if_PC(
@@ -212,8 +212,8 @@ output [5:0] MEM_WB_Rd;
 		);
 
 	Mux2to1_5bit ex_reg_dest_mux(
-		.A(ID_EX_Rt),
-		.B(ID_EX_Rd),
+		.inp0(ID_EX_Rt),
+		.inp1(ID_EX_Rd),
 		.sel(ID_EX_RegDst),
 		.out(EX_DestinationReg)
 		);
@@ -267,7 +267,7 @@ output [5:0] MEM_WB_Rd;
 		);
 
 	//Stage WB
-	Mux2to1 wb_mem_to_reg_mux(
+	Mux2to1_32bit wb_mem_to_reg_mux(
 		.inp0(MEM_WB_ALUResult),
 		.inp1(MEM_WB_ReadData),
 		.sel(MEM_WB_MemToReg),
