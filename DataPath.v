@@ -108,7 +108,7 @@ output [4:0] MEM_WB_Rd;
 
 	//Stage ID
 
-	assign opc = IF_ID_Inst[31:26];
+	assign Opc = IF_ID_Inst[31:26];
 	assign func = IF_ID_Inst[5:0];
 	assign inst = IF_ID_Inst;
 	assign ID_Rs = IF_ID_Inst[25:21];
