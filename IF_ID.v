@@ -8,19 +8,23 @@ input [31:0] InstIn;
 output [31:0] PCPlusOut;
 output [31:0] InstOut;
 
-	assign asyncRst = rst | aclr;
+	assign asyncRst = (rst == 1'b1)? 1'b1:
+			(aclr == 1'b1)? 1'b1:
+			1'b0;
 
-	Reg_32bit PCPlusReg(
+	Reg_32bit_WithClear PCPlusReg(
 		.clk(clk),
-		.rst(asyncRst),
+		.rst(rst),
+		.clr(aclr),
 		.d(PCPlusIn),
 		.en(IF_ID_Write),
 		.q(PCPlusOut)
 		);
 
-	Reg_32bit InstReg(
+	Reg_32bit_WithClear InstReg(
 		.clk(clk),
-		.rst(asyncRst),
+		.rst(rst),
+		.clr(clr),
 		.d(InstIn),
 		.en(IF_ID_Write),
 		.q(InstOut)
