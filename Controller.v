@@ -29,7 +29,7 @@ output MemRead;
 output MemToReg;
 output RegWrite;
 
-	wire RT,addi,andi,lw,sw,beq,bne,j;
+	wire RT,addi,andi,lw,sw,beq,bne,j,nop;
 	OpcDCD OD(
 		.Opc(Opc),
 		.RT(RT),
@@ -39,7 +39,8 @@ output RegWrite;
 		.sw(sw),
 		.beq(beq),
 		.bne(bne),
-		.j(j)
+		.j(j),
+		.nop(nop)
 	);
 
 	wire [1:0]ALUOp;
@@ -52,8 +53,8 @@ output RegWrite;
 		.beq(beq),
 		.bne(bne),
 		.j(j),
+		.nop(nop),
 		.InstSrc(InstSrc),
-		.PCSrc(PCSrc),
 		.ALUSrc(ALUSrc),
 		.ALUOp(ALUOp),
 		.RegDst(RegDst),
@@ -99,5 +100,3 @@ output RegWrite;
 	);
 
 endmodule
-	
-	
