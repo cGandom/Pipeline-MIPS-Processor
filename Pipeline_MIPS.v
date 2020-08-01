@@ -11,15 +11,15 @@ input rst;
 	wire [4:0]EX_MEM_Rd;
 	wire MEM_WB_RegWrite;
 	wire[4:0]MEM_WB_Rd;
-	wire [4:0]Rs;
-	wire [4:0]Rt;
+	wire [4:0]ID_Rs;
+	wire [4:0]ID_Rt;
 	wire ID_EX_MemRead;
 	wire InstSrc;
 	wire PCSrc;
 	wire PCWrite;
 	wire IF_ID_Write;
 	wire IF_Flush;
-	wire ChSel;
+	wire CSSel;
 	wire [1:0]ForwardA;
 	wire[1:0]ForwardB;
 	wire ALUSrc;
@@ -42,15 +42,15 @@ input rst;
 		.EX_MEM_Rd(EX_MEM_Rd),
 		.MEM_WB_RegWrite(MEM_WB_RegWrite),
 		.MEM_WB_Rd(MEM_WB_Rd),
-		.Rs(Rs),
-		.Rt(Rt),
+		.ID_Rs(ID_Rs),
+		.ID_Rt(ID_Rt),
 		.ID_EX_MemRead(ID_EX_MemRead),
 		.InstSrc(InstSrc),
 		.PCSrc(PCSrc),
 		.PCWrite(PCWrite),
 		.IF_ID_Write(IF_ID_Write),
 		.IF_Flush(IF_Flush),
-		.ChSel(ChSel),
+		.CSSel(CSSel),
 		.ForwardA(ForwardA),
 		.ForwardB(ForwardB),
 		.ALUSrc(ALUSrc),
@@ -72,15 +72,15 @@ input rst;
 		.EX_MEM_Rd(EX_MEM_Rd),
 		.MEM_WB_RegWrite(MEM_WB_RegWrite),
 		.MEM_WB_Rd(MEM_WB_Rd),
-		.Rs(Rs),
-		.Rt(Rt),
+		.ID_Rs(ID_Rs),
+		.ID_Rt(ID_Rt),
 		.ID_EX_MemRead(ID_EX_MemRead),
 		.InstSrc(InstSrc),
 		.PCSrc(PCSrc),
 		.PCWrite(PCWrite),
 		.IF_ID_Write(IF_ID_Write),
 		.IF_Flush(IF_Flush),
-		.ChSel(ChSel),
+		.CSSel(CSSel),
 		.ForwardA(ForwardA),
 		.ForwardB(ForwardB),
 		.ALUSrc(ALUSrc),
