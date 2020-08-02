@@ -6,8 +6,9 @@ input [31:0] d;
 input en;
 output reg [31:0] q;
 	
-	always @(posedge clk or posedge rst or posedge clr) begin
-		if (rst|clr) q <= 32'b0;
+	always @(posedge clk or posedge rst) begin
+		if (rst) q <= 32'b0;
+		else if (clr) q <= 32'b0;
 		else if (en) q <= d;
 	end
 
