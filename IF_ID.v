@@ -11,7 +11,7 @@ output [31:0] InstOut;
 	Reg_32bit_WithClear PCPlusReg(
 		.clk(clk),
 		.rst(rst),
-		.clr(aclr),
+		.clr(1'b0),
 		.d(PCPlusIn),
 		.en(IF_ID_Write),
 		.q(PCPlusOut)
