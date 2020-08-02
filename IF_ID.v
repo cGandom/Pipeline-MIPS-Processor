@@ -20,7 +20,7 @@ output [31:0] InstOut;
 	Reg_32bit_WithClear InstReg(
 		.clk(clk),
 		.rst(rst),
-		.clr(clr),
+		.clr(aclr),
 		.d(InstIn),
 		.en(IF_ID_Write),
 		.q(InstOut)
