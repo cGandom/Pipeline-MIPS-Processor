@@ -15,13 +15,13 @@ output [31:0] ReadData2;
 	assign ReadData2 = Register[ReadReg2];
 
 	integer i;
-	always @(posedge rst) begin
-		for (i = 0; i < 32; i = i+1)
-			Register[i] <= 0;
-	end
-
-	always @(negedge clk) begin
-		if (~rst & RegWrite & WriteReg != 5'b0)
+	always @(posedge rst or negedge clk) begin
+		if (rst) begin
+			for (i = 0; i < 32; i = i+1)
+				Register[i] <= 0;
+		end
+		else if (RegWrite & WriteReg != 5'b0)begin
 			Register[WriteReg] <= WriteData;
+		end
 	end
 endmodule
