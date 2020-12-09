@@ -1,2 +1,3 @@
-# CA-CA-4
-Computer Architecture - Computer Assignment 4: MIPS Pipeline Implementation
+#  MIPS Processor Pipeline Implementation
+
+Computer Architecture Project - Assignment 4
